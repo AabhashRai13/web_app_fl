@@ -1,7 +1,9 @@
 class AppStrings {
   //App title
-  static const String appTitle = "Find Scan Return";
+  static const String appTitle = "Okr Generator";
   static const String emptyString = "";
+  static const String cannotBeEmpty = "Can not be Empty";
+
   //route
   static const String noRouteFound = "No Route Found";
   static const String usernameValidationMSg = "Mobile can't be empty";
@@ -9,12 +11,14 @@ class AppStrings {
   static const String forgetPassword = "Forgot Password?";
 
   static const String emailValidationMSg = "Email can't be empty";
+  static const String emailNotValidValidationMSg = "Email address is wrong";
   static const String passwordValidationMSg = "Password can't be empty";
   static const String weakPasswordValidationMSg =
       "Password can't be less than 6 characters";
 
   //intro screen Text
   static const String continueText = "Continue";
+  static const String logOut = "Log out";
   static const String loginText = "Login";
   static const String userName = "User Name";
   static const String enterUserName = "Enter your User Name";
@@ -73,7 +77,7 @@ class AppStrings {
   static const String password = "password";
   static const String enterPassword = "Enter your password";
   static const String email = "Email";
-  static const String enterEmail = "Enter your email";
+  static const String enterEmail = "Enter email";
   static const String signUp = "Sign Up";
   static const String noAccount = "Don’t have an account? ";
   static const String agreeWithConditions =
@@ -81,10 +85,10 @@ class AppStrings {
   static const String confirmPassword = "Confirm Password";
   static const String reenterYourPassword = "Re-enter your password";
   static const String loginSuccess = "Login Success";
-  static const String enterFirstName = "Enter your First Name";
+  static const String enterName = "Enter your Name";
   static const String enterLastName = "Enter your Last Name";
 
-  static const String firstNameLabel = "First Name";
+  static const String nameLabel = "Name";
   static const String lastNameLabel = "Last Name";
   static const String serverFailure = "Check your Network connections";
   static const String credentialsFailure = "Check your Credentials";
@@ -94,4 +98,45 @@ class AppStrings {
 
   static const String quickSignUp = "Quick sign up";
   static const String welcomeBack = "Welcome back";
+  static const String okrGenerator = "OKR Generator";
+
+  ///// okr form field texts
+  static const String briefDescBusiness = "Brief description of your business";
+  static const String noOfEmp = "Number of employees";
+  static const String revenue = "Revenue";
+  static const String briefDescCustomer = "Brief description of your customers";
+  static const String listGoals = "List your goals";
+  static const String generateOkr = "Generate OKR";
+
+  ///// okr form field type
+  static const String briefDescType = "BriefDesc";
+  static const String noOfEmpType = "NumberOfEmployees";
+  static const String revenueType = "Revenue";
+  static const String briefDescCustomerType = "BriefDescCustomers";
+  static const String listGoalsType = "GoalsList";
+
+  //// okr table fields
+  static const String kra = "KRAs";
+  static const String initiatives = "Initiatives";
+
+  static const String edit = "Edit";
+  static const String delete = "Delete";
+  static const String save = "Save";
+  static const String downloadPdf = "Download PDF";
+
+  ////Loading texts
+  static const String loadingText1 = "Adding ingredients ...";
+  static const String loadingText2 = "Mixing the batter ...";
+  static const String loadingText3 = "Baking your OKRs to perfection ...";
+
+  static const String appBarTitleTwo = "Custom Based OKRs for your business";
+
+  static const String addObjectives = "Add Objectives";
+  static const String createNewOkrForYourBusiness =
+      "Create New Okrs for your Business.";
+  static const String okrName = "OKR Name";
+  static const String dateGenerated = "Generated Date";
+  static const String viewMore = "View More";
+  static const String fillAnyOneFieldFirst =
+      "Fill either Kra or Initiative before adding another field.";
 }
