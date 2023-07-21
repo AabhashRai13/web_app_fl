@@ -18,9 +18,10 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
     on<SignIn>(signIn);
   }
   signIn(SignIn event, Emitter<SignInState> emit) async {
+    
     emit(Loading());
     final result = await signInUsecase
-        .call(Params(email: event.email, password: event.password));
+        .call(Params(username: event.username, password: event.password));
 
     result.fold((l) {
       if (l is ServerFailure) {

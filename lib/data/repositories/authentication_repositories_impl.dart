@@ -1,7 +1,7 @@
-import 'dart:io';
+import 'dart:js_interop';
 import 'package:dartz/dartz.dart';
 import 'package:find_scan_return_web/app/preferences/shared_preferences_manager.dart';
-import 'package:find_scan_return_web/data/network/authorization_api_service.dart';
+import 'package:find_scan_return_web/data/network/api_service.dart';
 import 'package:find_scan_return_web/domain/entities/authentication.dart';
 import 'package:find_scan_return_web/domain/entities/register.dart';
 import 'package:find_scan_return_web/domain/entities/sign_in.dart';
@@ -12,10 +12,10 @@ import '../../domain/repositories/authentication_repository.dart';
 
 class AuthenticaionRepositoryImpl implements AuthenticationRepository {
   final NetworkInfo networkInfo;
-  final AuthorizationApiService authorizationApiService;
+
   final SharedPreferencesManager sharedPreferencesManager;
-  AuthenticaionRepositoryImpl(this.networkInfo, this.authorizationApiService,
-      this.sharedPreferencesManager);
+  final ApiService apiService = ApiService();
+  AuthenticaionRepositoryImpl(this.networkInfo, this.sharedPreferencesManager);
 
   @override
   Future<Either<Failure, Authentication>> signIn(
@@ -23,13 +23,15 @@ class AuthenticaionRepositoryImpl implements AuthenticationRepository {
     bool connection = await networkInfo.isConnected();
     if (connection) {
       try {
-        final httpResponse = await authorizationApiService.signInUser(
-            register: SignIn(username: userName!, password: password!));
+        final result = await apiService.signIn(SignIn(
+          username: "Aabh",
+          password: "admin@1",
+        ));
 
-        if (httpResponse.response.statusCode == HttpStatus.ok) {
+        if (result.isDefinedAndNotNull) {
           sharedPreferencesManager.putBool(
               SharedPreferencesManager.keyIsLogin, true);
-          return Right(httpResponse.data);
+          return Right(result!);
         } else {
           return Left(CredentialsFailure());
         }
@@ -47,11 +49,12 @@ class AuthenticaionRepositoryImpl implements AuthenticationRepository {
     bool connection = await networkInfo.isConnected();
     if (connection) {
       try {
-        final httpResponse = await authorizationApiService.registerUser(
-            register: Register(
-                email: email!, password: password!, username: userName!));
-        if (httpResponse.response.statusCode == HttpStatus.ok) {
-          return Right(httpResponse.data);
+        final result = await apiService.registerUser(
+            Register(email: email!, password: password!, username: userName!));
+        if (result.isDefinedAndNotNull) {
+          sharedPreferencesManager.putBool(
+              SharedPreferencesManager.keyIsLogin, true);
+          return Right(result!);
         } else {
           return Left(CredentialsFailure());
         }

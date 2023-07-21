@@ -13,10 +13,14 @@ String signInToJson(SignIn data) {
 class SignIn {
   final String username;
   final String password;
+  final String? imei;
+  final String? deviceType;
 
   SignIn({
     required this.username,
     required this.password,
+    this.imei,
+    this.deviceType
   });
 
   factory SignIn.fromJson(Map<String, dynamic> json) => SignIn(

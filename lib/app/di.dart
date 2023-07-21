@@ -1,10 +1,6 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:dio/dio.dart';
-import 'package:find_scan_return_web/app/app_constants.dart';
 import 'package:find_scan_return_web/app/preferences/shared_preferences_manager.dart';
-// ignore: import_of_legacy_library_into_null_safe
 import 'package:get_it/get_it.dart';
-
 import '../data/repositories/authentication_repositories_impl.dart';
 import '../domain/repositories/authentication_repository.dart';
 import '../domain/usecases/is_signed_in_usecase.dart';
@@ -25,21 +21,20 @@ Future<void> initAppModule() async {
       await SharedPreferencesManager.getInstance();
   sl.registerSingleton<SharedPreferencesManager>(sharedPreferencesManager);
 
-  // dio
-  sl.registerSingleton<Dio>(Dio());
-
-  sl<Dio>().options.baseUrl = AppConstants.devBaseURL;
-
 //// connectivity
   sl.registerLazySingleton<Connectivity>(() => Connectivity());
 
   sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl()));
 
+
   //repository
 
   sl.registerLazySingleton<AuthenticationRepository>(
-      () => AuthenticaionRepositoryImpl(sl(),sl(),sl()));
-  
+      () => AuthenticaionRepositoryImpl(
+            sl(),
+            sl(),
+          ));
+
   // UseCases
   sl.registerLazySingleton<SignUpUsecase>(() => SignUpUsecase(sl()));
   sl.registerLazySingleton<SignInUsecase>(() => SignInUsecase(sl()));
@@ -52,5 +47,4 @@ Future<void> initAppModule() async {
   sl.registerFactory<AuthenticationCubit>(() => AuthenticationCubit());
   sl.registerFactory<SignUpBloc>(() => SignUpBloc(sl()));
   sl.registerFactory<SignInBloc>(() => SignInBloc(sl()));
-
 }

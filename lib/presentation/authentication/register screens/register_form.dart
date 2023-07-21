@@ -4,11 +4,11 @@ import 'package:find_scan_return_web/presentation/resources/size_config.dart';
 import 'package:find_scan_return_web/presentation/resources/strings_manager.dart';
 import 'package:find_scan_return_web/presentation/widgets/buttons/default_button.dart';
 import 'package:find_scan_return_web/presentation/widgets/inputFields/email_form_field.dart';
-import 'package:find_scan_return_web/presentation/widgets/inputFields/password_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../widgets/widget/input_widgets.dart';
+import '../../widgets/widget/password_form_field.dart';
 
 class RegisterForm extends StatefulWidget {
   const RegisterForm({super.key});

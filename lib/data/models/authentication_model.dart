@@ -2,16 +2,17 @@ import 'package:find_scan_return_web/domain/entities/authentication.dart';
 
 class AuthenticationModel extends Authentication {
   AuthenticationModel(
-      {required String username,
-      required String email,
-      required String password,
+      {String? username,
+      String? email,
+      String? password,
       required bool isAdmin,
       required bool isPrinter,
       String? qrId,
-      required String id,
-      required String createdAt,
-      required String updatedAt,
-      required int v})
+      String? id,
+      String? createdAt,
+      String? updatedAt,
+      String? accessToken,
+      int? v})
       : super(
             updatedAt: updatedAt,
             email: email,
@@ -22,7 +23,8 @@ class AuthenticationModel extends Authentication {
             qrId: qrId,
             createdAt: createdAt,
             v: v,
-            id: id);
+            id: id,
+            accessToken: accessToken);
   factory AuthenticationModel.fromJson(Map<String, dynamic> json) =>
       AuthenticationModel(
         username: json["username"],
@@ -34,6 +36,7 @@ class AuthenticationModel extends Authentication {
         id: json["_id"],
         createdAt: json["createdAt"],
         updatedAt: json["updatedAt"],
+        accessToken: json["accessToken"],
         v: json["__v"],
       );
 
@@ -48,5 +51,6 @@ class AuthenticationModel extends Authentication {
         "createdAt": createdAt,
         "updatedAt": updatedAt,
         "__v": v,
+        "accessToken": accessToken
       };
 }

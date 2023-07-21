@@ -8,12 +8,12 @@ abstract class SignInEvent extends Equatable {
 }
 
 class SignIn extends SignInEvent {
-  final String email;
+  final String username;
   final String password;
-  const SignIn({required this.email, required this.password});
+  const SignIn({required this.username, required this.password});
 
   @override
-  List<Object> get props => [email, password];
+  List<Object> get props => [username, password];
 }
 
 class SignInWithGoogle extends SignInEvent {

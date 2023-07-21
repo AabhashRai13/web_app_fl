@@ -1,7 +1,7 @@
 import 'package:find_scan_return_web/presentation/resources/strings_manager.dart';
 import 'package:find_scan_return_web/presentation/widgets/buttons/default_button.dart';
-import 'package:find_scan_return_web/presentation/widgets/inputFields/password_form_field.dart';
 import 'package:find_scan_return_web/presentation/widgets/widget/input_widgets.dart';
+import 'package:find_scan_return_web/presentation/widgets/widget/password_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -85,7 +85,7 @@ class _LoginFormState extends State<LoginForm> {
                   press: () {
                     if (formKey.currentState!.validate()) {
                       signInBloc.add(SignIn(
-                          email: _username.text.trim(),
+                          username: _username.text.trim(),
                           password: _passwordEditingController.text.trim()));
                     }
                   },
