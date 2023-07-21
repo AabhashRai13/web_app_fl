@@ -1,9 +1,11 @@
+import 'package:find_scan_return_web/presentation/resources/router/routes_manager.dart';
 import 'package:find_scan_return_web/presentation/resources/strings_manager.dart';
 import 'package:find_scan_return_web/presentation/widgets/buttons/default_button.dart';
 import 'package:find_scan_return_web/presentation/widgets/widget/input_widgets.dart';
 import 'package:find_scan_return_web/presentation/widgets/widget/password_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../app/di.dart';
 import '../../resources/size_config.dart';
@@ -46,6 +48,7 @@ class _LoginFormState extends State<LoginForm> {
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(content: Text(AppStrings.loginSuccess)),
             );
+            context.pushNamed(Routes.home);
           } else if (state is Error) {
             loading = false;
 
@@ -93,25 +96,6 @@ class _LoginFormState extends State<LoginForm> {
                   text: AppStrings.signIn,
                 ),
               ),
-              const SizedBox(height: 40),
-              Row(children: [
-                Expanded(
-                  child: Divider(
-                    color: Colors.grey[300],
-                    height: 50,
-                  ),
-                ),
-                const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20),
-                  child: Text("Or continue with"),
-                ),
-                Expanded(
-                  child: Divider(
-                    color: Colors.grey[400],
-                    height: 50,
-                  ),
-                ),
-              ]),
               const SizedBox(height: 40),
             ],
           );

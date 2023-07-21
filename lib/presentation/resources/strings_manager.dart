@@ -96,25 +96,6 @@ class AppStrings {
   static const String phone = "Mobile";
   static const String enterPhoneNumber = "Enter Phone number";
 
-  static const String quickSignUp = "Quick sign up";
-  static const String welcomeBack = "Welcome back";
-  static const String okrGenerator = "OKR Generator";
-
-  ///// okr form field texts
-  static const String briefDescBusiness = "Brief description of your business";
-  static const String noOfEmp = "Number of employees";
-  static const String revenue = "Revenue";
-  static const String briefDescCustomer = "Brief description of your customers";
-  static const String listGoals = "List your goals";
-  static const String generateOkr = "Generate OKR";
-
-  ///// okr form field type
-  static const String briefDescType = "BriefDesc";
-  static const String noOfEmpType = "NumberOfEmployees";
-  static const String revenueType = "Revenue";
-  static const String briefDescCustomerType = "BriefDescCustomers";
-  static const String listGoalsType = "GoalsList";
-
   //// okr table fields
   static const String kra = "KRAs";
   static const String initiatives = "Initiatives";
@@ -123,20 +104,4 @@ class AppStrings {
   static const String delete = "Delete";
   static const String save = "Save";
   static const String downloadPdf = "Download PDF";
-
-  ////Loading texts
-  static const String loadingText1 = "Adding ingredients ...";
-  static const String loadingText2 = "Mixing the batter ...";
-  static const String loadingText3 = "Baking your OKRs to perfection ...";
-
-  static const String appBarTitleTwo = "Custom Based OKRs for your business";
-
-  static const String addObjectives = "Add Objectives";
-  static const String createNewOkrForYourBusiness =
-      "Create New Okrs for your Business.";
-  static const String okrName = "OKR Name";
-  static const String dateGenerated = "Generated Date";
-  static const String viewMore = "View More";
-  static const String fillAnyOneFieldFirst =
-      "Fill either Kra or Initiative before adding another field.";
 }

@@ -26,7 +26,7 @@ class SignInBanner extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    'Sign in to our \nAI-powered OKR generator',
+                    'Sign In to \nCreate QR and Print',
                     textAlign: TextAlign.start,
                     style: TextStyle(
                       fontSize: isDesktop ? 45 : 30,

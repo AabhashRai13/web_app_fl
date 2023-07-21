@@ -4,7 +4,6 @@ import '../../resources/color_manager.dart';
 import '../../resources/size_config.dart';
 import '../authentication cubit/authentication_cubit.dart';
 
-
 class SignUpBanner extends StatelessWidget {
   final bool isDesktop;
 
@@ -29,7 +28,7 @@ class SignUpBanner extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    'Register to view, \nsave, and edit your OKRs',
+                    'Register to view, \nsave, and edit Qr codes',
                     style: TextStyle(
                       fontSize: isDesktop ? 45 : 30,
                       fontWeight: FontWeight.bold,

@@ -50,8 +50,7 @@ class _RegisterFormState extends State<RegisterForm> {
             microsoftLoading = true;
           } else if (state is Loaded) {
             loading = false;
-
-          }else if (state is Error) {
+          } else if (state is Error) {
             googleLoading = false;
 
             loading = false;
@@ -106,25 +105,6 @@ class _RegisterFormState extends State<RegisterForm> {
                   text: AppStrings.signUp,
                 ),
               ),
-              const SizedBox(height: 40),
-              Row(children: [
-                Expanded(
-                  child: Divider(
-                    color: Colors.grey[300],
-                    height: 50,
-                  ),
-                ),
-                const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20),
-                  child: Text("Or continue with"),
-                ),
-                Expanded(
-                  child: Divider(
-                    color: Colors.grey[400],
-                    height: 50,
-                  ),
-                ),
-              ]),
               const SizedBox(height: 40),
             ],
           );
