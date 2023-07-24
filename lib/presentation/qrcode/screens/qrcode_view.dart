@@ -28,8 +28,13 @@ class _QrCodeViewState extends State<QrCodeView> {
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
-    return BlocBuilder<QrBloc, QrState>(
+    return BlocConsumer<QrBloc, QrState>(
       bloc: qrBloc,
+      listener: (context, state) {
+        if (state is QrCreated) {
+          qrBloc.add(const GetBatchNumbersEvent());
+        }
+      },
       builder: (context, state) {
         if (state is BatchNumber) {
           return Responsive(
@@ -42,6 +47,10 @@ class _QrCodeViewState extends State<QrCodeView> {
             ),
           );
         } else if (state is BatchNumberLoading) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        } else if (state is QrLoading) {
           return const Center(
             child: CircularProgressIndicator(),
           );
