@@ -2,6 +2,7 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:find_scan_return_web/app/preferences/shared_preferences_manager.dart';
 import 'package:find_scan_return_web/data/repositories/qrcode_repositories_impl.dart';
 import 'package:find_scan_return_web/domain/repositories/qrcode_repository.dart';
+import 'package:find_scan_return_web/domain/usecases/download_qrcode_usecase.dart';
 import 'package:find_scan_return_web/domain/usecases/generate_qrcode_usecase.dart';
 import 'package:find_scan_return_web/domain/usecases/get_batch_number_usecase.dart';
 import 'package:find_scan_return_web/presentation/qrcode/bloc/qr_bloc.dart';
@@ -52,13 +53,15 @@ Future<void> initAppModule() async {
   sl.registerLazySingleton<IsSignedInUsecase>(() => IsSignedInUsecase(sl()));
   sl.registerLazySingleton<GenerateQrCodeUsecase>(
       () => GenerateQrCodeUsecase(sl()));
-      sl.registerLazySingleton<GetBatchNumberUseCase>(
+  sl.registerLazySingleton<GetBatchNumberUseCase>(
       () => GetBatchNumberUseCase(sl()));
+  sl.registerLazySingleton<DownloadQrCodeUsecase>(
+      () => DownloadQrCodeUsecase(sl()));
 
   /// blocs and cubits
   sl.registerFactory<ObscureCubit>(() => ObscureCubit());
   sl.registerFactory<AuthenticationCubit>(() => AuthenticationCubit());
   sl.registerFactory<SignUpBloc>(() => SignUpBloc(sl()));
   sl.registerFactory<SignInBloc>(() => SignInBloc(sl()));
-  sl.registerLazySingleton<QrBloc>(() => QrBloc(sl(), sl()));
+  sl.registerLazySingleton<QrBloc>(() => QrBloc(sl(), sl(), sl()));
 }

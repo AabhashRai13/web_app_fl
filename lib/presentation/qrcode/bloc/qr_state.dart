@@ -27,3 +27,7 @@ class BatchNumber extends QrState {
 }
 
 class BatchNumberLoading extends QrState {}
+
+class QrDownloading extends QrState {}
+
+class QrDownloaded extends QrState {}

@@ -6,5 +6,5 @@ abstract class QrCodeRepository {
   Future<Either<Failure, bool>> generateQRCode({required int numberOfQrCode});
 
   Future<Either<Failure, List<BatchNumbers>>> getBatches();
-  Future<void> downloadQr({required int batchNumber});
+  Future<Either<Failure, bool>> downloadQr({required int batchNumber});
 }

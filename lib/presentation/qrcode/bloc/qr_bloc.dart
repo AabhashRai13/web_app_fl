@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:find_scan_return_web/app/error/failures.dart';
 import 'package:find_scan_return_web/domain/entities/batch_number.dart';
+import 'package:find_scan_return_web/domain/usecases/download_qrcode_usecase.dart';
 import 'package:find_scan_return_web/domain/usecases/generate_qrcode_usecase.dart';
 import 'package:find_scan_return_web/domain/usecases/get_batch_number_usecase.dart';
 import 'package:find_scan_return_web/presentation/resources/strings_manager.dart';
@@ -12,10 +13,13 @@ part 'qr_state.dart';
 class QrBloc extends Bloc<QrEvent, QrState> {
   final GenerateQrCodeUsecase generateQrCodeUsecase;
   final GetBatchNumberUseCase getBatchNumberUseCase;
-  QrBloc(this.generateQrCodeUsecase, this.getBatchNumberUseCase)
+  final DownloadQrCodeUsecase downloadQrCodeUsecase;
+  QrBloc(this.generateQrCodeUsecase, this.getBatchNumberUseCase,
+      this.downloadQrCodeUsecase)
       : super(QrInitial()) {
     on<CreateQrEvent>(createQr);
     on<GetBatchNumbersEvent>(getBatchNumber);
+    on<DownloadQrEvent>(downloadQR);
   }
 
   createQr(CreateQrEvent event, Emitter<QrState> emit) async {
@@ -47,5 +51,10 @@ class QrBloc extends Bloc<QrEvent, QrState> {
     }, (r) {
       emit(BatchNumber(batchNumbers: r));
     });
+  }
+
+  downloadQR(DownloadQrEvent event, Emitter<QrState> emit) async {
+    await downloadQrCodeUsecase
+        .call(ParamsDownload(batchNumber: event.batchNumber));
   }
 }

@@ -8,10 +8,10 @@ import 'package:find_scan_return_web/presentation/widgets/buttons/hover_button.d
 import 'package:flutter/material.dart';
 import 'package:collection/collection.dart';
 
-class BatchTable extends StatelessWidget {
+class BatchTableMobile extends StatelessWidget {
   final List<BatchNumbers> data; // Replace with your data model
 
-  const BatchTable({
+  const BatchTableMobile({
     super.key,
     required this.data,
   });
@@ -27,24 +27,15 @@ class BatchTable extends StatelessWidget {
             AppStrings.batchNumber,
             style: topicStyleMobile,
           )),
-          DataColumn(
-              label: Text(
-            AppStrings.dateGenerated,
-            style: topicStyleMobile,
-          )),
           // Add more DataColumn widgets as needed
         ],
         rows: data.mapIndexed((index, item) {
           return DataRow(
             cells: [
-              DataCell(InkWell(
-                onTap: () {},
-                child: Text("Batch numbers: ${item.batchNumber}"),
-              )),
               DataCell(DataCellWithIcon(
-                date: item.dateTime,
+                text: "Batch numbers: ${item.batchNumber}",
                 index: index,
-                batchNumber: item.batchNumber!,
+                batchNumbers: item.batchNumber!,
               )),
               // Add more DataCell widgets as needed
             ],
@@ -56,12 +47,12 @@ class BatchTable extends StatelessWidget {
 }
 
 class DataCellWithIcon extends StatelessWidget {
-  final String? date;
+  final String? text;
 
   final int? index;
-  final int batchNumber;
+  final int batchNumbers;
   DataCellWithIcon(
-      {super.key, this.date, this.index, required this.batchNumber});
+      {super.key, this.text, this.index, required this.batchNumbers});
   final QrBloc qrBloc = sl<QrBloc>();
 
   Future<void> showMyDialog(BuildContext context) async {
@@ -70,7 +61,7 @@ class DataCellWithIcon extends StatelessWidget {
       barrierDismissible: false, // user must tap button!
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('Are you sure you want to delete this Batch?'),
+          title: const Text('Are you sure you want to delete this Okr?'),
           actions: <Widget>[
             TextButton(
               child: const Text('Yes'),
@@ -94,14 +85,14 @@ class DataCellWithIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Text(date!),
+        Text(text!),
         const Spacer(),
         HoverButton(
           hoverText: AppStrings.downloadQrCodes,
           color: Colors.red,
           icon: Icons.download,
           function: () {
-            qrBloc.add(DownloadQrEvent(batchNumber: batchNumber));
+            qrBloc.add(DownloadQrEvent(batchNumber: batchNumbers));
           },
         ),
         SizedBox(

@@ -1,5 +1,6 @@
 import 'dart:developer';
 import 'package:dio/dio.dart';
+import 'package:file_saver/file_saver.dart';
 import 'package:find_scan_return_web/app/app_constants.dart';
 import 'package:find_scan_return_web/data/models/authentication_model.dart';
 import 'package:find_scan_return_web/domain/entities/authentication.dart';
@@ -8,6 +9,7 @@ import 'package:find_scan_return_web/domain/entities/register.dart';
 
 import '../../domain/entities/sign_in.dart';
 import '../models/batch_number_model.dart';
+import 'dart:typed_data';
 
 class ApiService {
   final Dio dio = Dio();
@@ -87,6 +89,36 @@ class ApiService {
     } catch (e) {
       log("Error $e");
       return null;
+    }
+  }
+
+  Future<bool> downloadQrCodes(String batchNumber, String accessToken) async {
+    try {
+      final response = await dio.get(
+          '${AppConstants.devBaseURL}/qrcodes/download/$batchNumber',
+          options: Options(headers: {
+            'token': 'Bearer $accessToken',
+          }, responseType: ResponseType.bytes));
+      if (response.statusCode == 200) {
+        // Get the filename from the response headers
+        String fileName = "image.zip";
+
+        // Convert response data to Uint8List
+        Uint8List data = Uint8List.fromList(response.data);
+
+        // Save the file using flutter_file_saver
+        final result = await FileSaver.instance.saveFile(
+          name: fileName,
+          bytes: data,
+          mimeType: MimeType.zip,
+        );
+        log("------ result ------");
+        log(result);
+      }
+      return false;
+    } catch (e) {
+      log("Error $e");
+      return false;
     }
   }
 }

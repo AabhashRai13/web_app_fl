@@ -1,5 +1,6 @@
 import 'dart:js_interop';
 import 'package:dartz/dartz.dart';
+import 'package:find_scan_return_web/app/preferences/local_storage_manager.dart';
 import 'package:find_scan_return_web/app/preferences/shared_preferences_manager.dart';
 import 'package:find_scan_return_web/data/network/api_service.dart';
 import 'package:find_scan_return_web/domain/entities/authentication.dart';
@@ -15,6 +16,7 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
 
   final SharedPreferencesManager sharedPreferencesManager;
   final ApiService apiService = ApiService();
+  final LocalStorageService _localStorageService = LocalStorageService();
   AuthenticationRepositoryImpl(this.networkInfo, this.sharedPreferencesManager);
 
   @override
@@ -31,8 +33,7 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
         if (result.isDefinedAndNotNull) {
           sharedPreferencesManager.putBool(
               SharedPreferencesManager.keyIsLogin, true);
-          sharedPreferencesManager.putString(
-              SharedPreferencesManager.keyAccessToken, result!.accessToken!);
+          _localStorageService.saveTokenToLocalStorage(result!.accessToken!);
           return Right(result);
         } else {
           return Left(CredentialsFailure());
@@ -55,8 +56,8 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
             Register(email: email!, password: password!, username: userName!));
 
         if (result.isDefinedAndNotNull) {
-          sharedPreferencesManager.putString(
-              SharedPreferencesManager.keyAccessToken, result!.accessToken!);
+          _localStorageService.saveTokenToLocalStorage(result!.accessToken!);
+
           sharedPreferencesManager.putBool(
               SharedPreferencesManager.keyIsLogin, true);
           return Right(result);
@@ -73,12 +74,13 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
 
   @override
   Future<void> signOut() async {
+    _localStorageService.clearLocalStorage();
     sharedPreferencesManager.clearAll();
   }
 
   @override
   Future<bool> isSignedIn() async {
-    return sharedPreferencesManager
-        .getBool(SharedPreferencesManager.keyAccessToken);
+    bool isSignIn = _localStorageService.getTokenFromLocalStorage() != null;
+    return isSignIn;
   }
 }

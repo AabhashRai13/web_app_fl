@@ -1,12 +1,15 @@
+import 'package:find_scan_return_web/domain/entities/batch_number.dart';
+import 'package:find_scan_return_web/presentation/widgets/widget/batch_table_mobile.dart';
 import 'package:flutter/material.dart';
 
 class QrCodeMobile extends StatelessWidget {
-  const QrCodeMobile({super.key});
+  final List<BatchNumbers> batchNumbers;
+  const QrCodeMobile({super.key, required this.batchNumbers});
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: Text("Here Qr codes will be here"),
+    return BatchTableMobile(
+      data: batchNumbers,
     );
   }
 }

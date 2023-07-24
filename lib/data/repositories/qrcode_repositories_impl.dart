@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
+import 'package:find_scan_return_web/app/preferences/local_storage_manager.dart';
 import 'package:find_scan_return_web/app/preferences/shared_preferences_manager.dart';
 import 'package:find_scan_return_web/data/network/api_service.dart';
 import 'package:find_scan_return_web/domain/entities/batch_number.dart';
@@ -14,12 +15,32 @@ class QrCodeRepositoryImpl implements QrCodeRepository {
 
   final SharedPreferencesManager sharedPreferencesManager;
   final ApiService apiService = ApiService();
+  final LocalStorageService _localStorageService = LocalStorageService();
   QrCodeRepositoryImpl(this.networkInfo, this.sharedPreferencesManager);
 
   @override
-  Future<void> downloadQr({int? batchNumber}) {
-    // TODO: implement downloadQr
-    throw UnimplementedError();
+  Future<Either<Failure, bool>> downloadQr({int? batchNumber}) async {
+    bool connection = await networkInfo.isConnected();
+    log("-------- auth Token ----------");
+    String accessToken = _localStorageService.getTokenFromLocalStorage()!;
+
+    log(accessToken);
+    if (connection) {
+      try {
+        final result = await apiService.downloadQrCodes(
+            batchNumber.toString(), accessToken);
+
+        if (result) {
+          return Right(result);
+        } else {
+          return Left(CredentialsFailure());
+        }
+      } on ServerException {
+        return Left(ServerFailure());
+      }
+    } else {
+      return Left(ServerFailure());
+    }
   }
 
   @override
@@ -27,9 +48,7 @@ class QrCodeRepositoryImpl implements QrCodeRepository {
       {required int numberOfQrCode}) async {
     bool connection = await networkInfo.isConnected();
     log("-------- auth Token ----------");
-    String accessToken =
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0YmI2OTBiNmNlZDQ5NTZlY2UyNmVhMCIsImlzQWRtaW4iOnRydWUsImlzUHJpbnRlciI6dHJ1ZSwiaWF0IjoxNjkwMDkxMzg5LCJleHAiOjE2OTAzNTA1ODl9.z2EpUficZbkfdxORPPCsiyfi7Tudf_XnsfN-ao0zKQU";
-
+    String accessToken = _localStorageService.getTokenFromLocalStorage()!;
     log(accessToken);
     if (connection) {
       try {
@@ -50,17 +69,14 @@ class QrCodeRepositoryImpl implements QrCodeRepository {
   }
 
   @override
-  Future<Either<Failure, List<BatchNumbers>>> getBatches()async {
-     bool connection = await networkInfo.isConnected();
+  Future<Either<Failure, List<BatchNumbers>>> getBatches() async {
+    bool connection = await networkInfo.isConnected();
     log("-------- auth Token ----------");
-    String accessToken =
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0YmI2OTBiNmNlZDQ5NTZlY2UyNmVhMCIsImlzQWRtaW4iOnRydWUsImlzUHJpbnRlciI6dHJ1ZSwiaWF0IjoxNjkwMDkxMzg5LCJleHAiOjE2OTAzNTA1ODl9.z2EpUficZbkfdxORPPCsiyfi7Tudf_XnsfN-ao0zKQU";
-
+    String accessToken = _localStorageService.getTokenFromLocalStorage()!;
     log(accessToken);
     if (connection) {
       try {
-        final result =
-            await apiService.getBatchNumbers(accessToken);
+        final result = await apiService.getBatchNumbers(accessToken);
 
         if (result != null) {
           return Right(result);

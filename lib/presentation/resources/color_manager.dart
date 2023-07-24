@@ -8,6 +8,7 @@ class ColorManager {
   static Color blueBackground = HexColor.fromHex("#F4F7FF");
   static Color kTextColor = Colors.black;
   static Color normalBorderColor = Colors.grey[400]!;
+  static Color floatingActionButtonColor = HexColor.fromHex("#F0E800");
 }
 
 extension HexColor on Color {

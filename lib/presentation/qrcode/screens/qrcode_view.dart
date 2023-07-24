@@ -38,7 +38,9 @@ class _QrCodeViewState extends State<QrCodeView> {
       builder: (context, state) {
         if (state is BatchNumber) {
           return Responsive(
-            mobile: const QrCodeMobile(),
+            mobile: QrCodeMobile(
+              batchNumbers: state.batchNumbers,
+            ),
             tablet: QrCodeDesktop(
               batchNumbers: state.batchNumbers,
             ),

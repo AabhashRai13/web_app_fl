@@ -1,3 +1,7 @@
+import 'package:find_scan_return_web/presentation/qrcode/screens/qrcode_view.dart';
+import 'package:find_scan_return_web/presentation/resources/color_manager.dart';
+import 'package:find_scan_return_web/presentation/resources/size_config.dart';
+import 'package:find_scan_return_web/presentation/widgets/alertMessages/create_qr_alert.dart';
 import 'package:flutter/material.dart';
 
 class HomeMobile extends StatefulWidget {
@@ -10,14 +14,7 @@ class HomeMobile extends StatefulWidget {
 class HomeMobileState extends State<HomeMobile> {
   final List<Widget> _screens = [
     // Content for Home tab
-    Container(
-      color: Colors.yellow.shade100,
-      alignment: Alignment.center,
-      child: const Text(
-        'Home',
-        style: TextStyle(fontSize: 40),
-      ),
-    ),
+    const QrCodeView(),
     // Content for Feed tab
     Container(
       color: Colors.purple.shade100,
@@ -51,26 +48,77 @@ class HomeMobileState extends State<HomeMobile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: BottomNavigationBar(
-          currentIndex: _selectedIndex,
-          unselectedItemColor: Colors.grey,
-          selectedItemColor: Colors.indigoAccent,
-          // called when one tab is selected
-          onTap: (int index) {
-            setState(() {
-              _selectedIndex = index;
-            });
-          },
-          // bottom tab items
-          items: const [
-            BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-            BottomNavigationBarItem(icon: Icon(Icons.feed), label: 'Feed'),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.favorite), label: 'Favorites'),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.settings), label: 'Settings')
-          ]),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          showDialogToGenerateQr(context);
+        },
+        backgroundColor: ColorManager.floatingActionButtonColor,
+        child: const Icon(Icons.create),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.startDocked,
+      bottomNavigationBar: BottomAppBar(
+          height: getProportionateScreenHeight(65),
+          color: ColorManager.primary,
+          shape: const CircularNotchedRectangle(), //shape of notch
+          notchMargin:
+              5, //notche margin between floating button and bottom appbar
+          child: Row(
+            //children inside bottom appbar
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.only(left: 90),
+                child: IconButton(
+                  icon: const Icon(
+                    Icons.home,
+                    color: Colors.white,
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      _selectedIndex = 0;
+                    });
+                  },
+                ),
+              ),
+              IconButton(
+                icon: const Icon(
+                  Icons.feed,
+                  color: Colors.white,
+                ),
+                onPressed: () {
+                  setState(() {
+                    _selectedIndex = 1;
+                  });
+                },
+              ),
+              IconButton(
+                icon: const Icon(
+                  Icons.favorite,
+                  color: Colors.white,
+                ),
+                onPressed: () {
+                  setState(() {
+                    _selectedIndex = 2;
+                  });
+                },
+              ),
+              IconButton(
+                icon: const Icon(
+                  Icons.settings,
+                  color: Colors.white,
+                ),
+                onPressed: () {
+                  setState(() {
+                    _selectedIndex = 3;
+                  });
+                },
+              ),
+            ],
+          )),
       body: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [Expanded(child: _screens[_selectedIndex])],
       ),
     );

@@ -15,3 +15,8 @@ class CreateQrEvent extends QrEvent {
 class GetBatchNumbersEvent extends QrEvent {
   const GetBatchNumbersEvent();
 }
+
+class DownloadQrEvent extends QrEvent {
+  final int batchNumber;
+  const DownloadQrEvent({required this.batchNumber});
+}
