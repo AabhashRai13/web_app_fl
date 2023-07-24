@@ -1,13 +1,15 @@
 import 'package:find_scan_return_web/app/di.dart';
 import 'package:find_scan_return_web/presentation/authentication/register%20screens/register_bloc/sign_up_bloc.dart';
+import 'package:find_scan_return_web/presentation/resources/router/routes_manager.dart';
 import 'package:find_scan_return_web/presentation/resources/size_config.dart';
 import 'package:find_scan_return_web/presentation/resources/strings_manager.dart';
 import 'package:find_scan_return_web/presentation/widgets/buttons/default_button.dart';
 import 'package:find_scan_return_web/presentation/widgets/inputFields/email_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
-import '../../widgets/widget/input_widgets.dart';
+import '../../widgets/inputFields/input_widgets.dart';
 import '../../widgets/widget/password_form_field.dart';
 
 class RegisterForm extends StatefulWidget {
@@ -44,15 +46,13 @@ class _RegisterFormState extends State<RegisterForm> {
         listener: (context, state) {
           if (state is Loading) {
             loading = true;
-          } else if (state is GoogleLoading) {
-            googleLoading = true;
-          } else if (state is MicroSoftLoading) {
-            microsoftLoading = true;
           } else if (state is Loaded) {
             loading = false;
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text(AppStrings.loginSuccess)),
+            );
+            context.pushReplacementNamed(Routes.home);
           } else if (state is Error) {
-            googleLoading = false;
-
             loading = false;
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(content: Text(state.message)),

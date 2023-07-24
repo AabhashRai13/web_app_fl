@@ -1,3 +1,4 @@
+import 'package:find_scan_return_web/presentation/resources/assets_manager.dart';
 import 'package:flutter/material.dart';
 
 import '../../resources/color_manager.dart';
@@ -25,8 +26,11 @@ class SignUpBanner extends StatelessWidget {
                   left: getProportionateScreenWidth(isDesktop ? 40 : 10)),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
+                  SizedBox(
+                      height: getProportionateScreenHeight(300),
+                      child: Image.asset(ImageAssets.logo)),
                   Text(
                     'Register to view, \nsave, and edit Qr codes',
                     style: TextStyle(

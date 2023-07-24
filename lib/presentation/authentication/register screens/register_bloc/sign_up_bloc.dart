@@ -11,8 +11,7 @@ part 'sign_up_state.dart';
 class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
   final SignUpUsecase signUpUsecase;
 
-  SignUpBloc(this.signUpUsecase)
-      : super(SignUpInitial()) {
+  SignUpBloc(this.signUpUsecase) : super(SignUpInitial()) {
     on<SignUp>(signUp);
   }
   signUp(SignUp event, Emitter<SignUpState> emit) async {

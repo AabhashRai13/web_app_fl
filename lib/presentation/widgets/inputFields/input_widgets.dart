@@ -3,7 +3,6 @@ import 'package:find_scan_return_web/presentation/resources/size_config.dart';
 import 'package:find_scan_return_web/presentation/resources/strings_manager.dart';
 import 'package:flutter/material.dart';
 
-
 class InputFields extends StatelessWidget {
   final bool isRequired;
 
@@ -15,6 +14,7 @@ class InputFields extends StatelessWidget {
   final String? prefixIcon;
   final String? type;
   final int? multipleInputIndex;
+  final TextInputType? inputType;
   const InputFields(
       {super.key,
       required this.inputController,
@@ -24,18 +24,17 @@ class InputFields extends StatelessWidget {
       this.labelText,
       this.icon,
       this.prefixIcon,
-
       this.type,
-      this.multipleInputIndex});
+      this.multipleInputIndex,
+      this.inputType});
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      keyboardType: TextInputType.multiline,
+      keyboardType: inputType ?? TextInputType.multiline,
       maxLines: null,
       controller: inputController,
-      onChanged: (value) {
-      },
+      onChanged: (value) {},
       validator: (value) {
         if (isRequired && value!.isEmpty) {
           return validationMsg ?? AppStrings.cannotBeEmpty;

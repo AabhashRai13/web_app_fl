@@ -35,7 +35,7 @@ class SharedPreferencesManager {
   Future<bool> putString(String key, String value) =>
       _sharedPreferences.setString(key, value);
 
-  String getString(String key) => _sharedPreferences.getString(key)!;
+  String? getString(String key) => _sharedPreferences.getString(key);
 
   Future<bool> putStringList(String key, List<String> value) =>
       _sharedPreferences.setStringList(key, value);

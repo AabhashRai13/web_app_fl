@@ -48,15 +48,15 @@ TextTheme textTheme() {
 
 AppBarTheme appBarTheme() {
   return AppBarTheme(
-    color: Colors.white,
+    color: ColorManager.primary,
     elevation: 0,
-    iconTheme: const IconThemeData(color: Colors.black),
+    iconTheme: const IconThemeData(color: Colors.white),
     systemOverlayStyle: SystemUiOverlayStyle.dark,
     toolbarTextStyle: const TextTheme(
       titleLarge: TextStyle(color: Color(0XFF8B8B8B), fontSize: 18),
     ).bodyMedium,
     titleTextStyle: const TextTheme(
-      titleLarge: TextStyle(color: Color(0XFF8B8B8B), fontSize: 18),
+      titleLarge: TextStyle(color: Colors.white, fontSize: 18),
     ).titleLarge,
   );
 }

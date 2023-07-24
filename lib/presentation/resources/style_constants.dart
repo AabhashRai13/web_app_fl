@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 
 import 'color_manager.dart';
 
-
 final headingStyle = TextStyle(
   fontSize: getProportionateScreenWidth(28),
   fontWeight: FontWeight.bold,
@@ -11,10 +10,22 @@ final headingStyle = TextStyle(
   height: 1.5,
 );
 final labelStyle = TextStyle(
-  fontSize: getProportionateScreenWidth(28),
+  fontSize: getProportionateScreenWidth(8),
   fontWeight: FontWeight.bold,
   color: Colors.black,
-  height: 1.5,
+  height: 1,
+);
+final topicStyleWeb = TextStyle(
+  fontSize: getProportionateScreenWidth(6),
+  fontWeight: FontWeight.bold,
+  color: Colors.black,
+  height: 1,
+);
+final topicStyleMobile = TextStyle(
+  fontSize: getProportionateScreenWidth(12),
+  fontWeight: FontWeight.bold,
+  color: Colors.black,
+  height: 1,
 );
 final otpInputDecoration = InputDecoration(
   contentPadding:
@@ -27,8 +38,6 @@ final otpInputDecoration = InputDecoration(
 OutlineInputBorder outlineInputBorder() {
   return OutlineInputBorder(
     borderRadius: BorderRadius.circular(getProportionateScreenWidth(15)),
-    borderSide:  BorderSide(color: ColorManager.kTextColor),
+    borderSide: BorderSide(color: ColorManager.kTextColor),
   );
 }
-
-

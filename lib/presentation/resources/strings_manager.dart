@@ -1,6 +1,6 @@
 class AppStrings {
   //App title
-  static const String appTitle = "Okr Generator";
+  static const String appTitle = "Find Scan Return";
   static const String emptyString = "";
   static const String cannotBeEmpty = "Can not be Empty";
 
@@ -50,12 +50,6 @@ class AppStrings {
   static const String signUpPageText =
       "Quickly use your mobile number to create an account or use one of the other options below.";
 
-  static const String addLicensePlateValidationError =
-      "You must enter Valid License plate number";
-  static const String addLicensePlateText = "Enter your rego";
-  static const String licensePlateLabe = "License Plate Number";
-
-  static const String enterLicensePlateHintText = "Enter License Plate Number";
   static const String addPhoneNumberValidationError =
       "You must enter Valid Phone number";
   static const String addPhoneNumberText =
@@ -66,9 +60,7 @@ class AppStrings {
   static const String carFoundPageText =
       "Is this your car? If yes Press Continue.";
   static const String processingData = "Processing Data";
-  static const String carNotFoundTitle = "Rego Not Found";
-  static const String carNotFound =
-      "Hmm that Rego didn't return a result. Alternatively find";
+
   static const String rememberMe = "Remember me";
   static const String signUpScreenText2 =
       "We will send a verifcation code on this number";
@@ -103,5 +95,13 @@ class AppStrings {
   static const String edit = "Edit";
   static const String delete = "Delete";
   static const String save = "Save";
-  static const String downloadPdf = "Download PDF";
+  static const String downloadQrCodes = "Download QR Codes";
+  static const String createQr = "Create Qr";
+
+  static const String enterTheNumberOfQr =
+      "Please enter the number of QR you want to create.";
+
+  static const String somethingWentWrong = "Something Went Wrong";
+  static const String batchNumber = "Batch number";
+  static const String dateGenerated = "Generated Date";
 }

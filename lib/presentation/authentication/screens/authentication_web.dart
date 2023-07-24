@@ -39,6 +39,7 @@ class _LoginPageWebState extends State<LoginPageWeb> {
         builder: (context, state) {
           return Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               state.isSignIn
                   ? SignInBanner(

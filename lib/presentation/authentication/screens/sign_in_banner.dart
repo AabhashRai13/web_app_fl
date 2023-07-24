@@ -1,3 +1,4 @@
+import 'package:find_scan_return_web/presentation/resources/assets_manager.dart';
 import 'package:find_scan_return_web/presentation/resources/color_manager.dart';
 import 'package:flutter/material.dart';
 
@@ -19,12 +20,15 @@ class SignInBanner extends StatelessWidget {
       child: size.height < 427
           ? const SizedBox.shrink()
           : Padding(
-              padding: EdgeInsets.all(
-                  getProportionateScreenWidth(isDesktop ? 40 : 10)),
+              padding: EdgeInsets.only(
+                  left: getProportionateScreenWidth(isDesktop ? 40 : 10)),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
+                  SizedBox(
+                      height: getProportionateScreenHeight(300),
+                      child: Image.asset(ImageAssets.logo)),
                   Text(
                     'Sign In to \nCreate QR and Print',
                     textAlign: TextAlign.start,
@@ -34,7 +38,7 @@ class SignInBanner extends StatelessWidget {
                     ),
                   ),
                   SizedBox(
-                    height: isDesktop ? 30 : 15,
+                    height: isDesktop ? 20 : 12,
                   ),
                   const Text(
                     "If you don't have an account",

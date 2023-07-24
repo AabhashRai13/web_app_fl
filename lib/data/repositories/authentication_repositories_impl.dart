@@ -10,12 +10,12 @@ import '../../app/error/failures.dart';
 import '../../app/network/network_info.dart';
 import '../../domain/repositories/authentication_repository.dart';
 
-class AuthenticaionRepositoryImpl implements AuthenticationRepository {
+class AuthenticationRepositoryImpl implements AuthenticationRepository {
   final NetworkInfo networkInfo;
 
   final SharedPreferencesManager sharedPreferencesManager;
   final ApiService apiService = ApiService();
-  AuthenticaionRepositoryImpl(this.networkInfo, this.sharedPreferencesManager);
+  AuthenticationRepositoryImpl(this.networkInfo, this.sharedPreferencesManager);
 
   @override
   Future<Either<Failure, Authentication>> signIn(
@@ -24,14 +24,16 @@ class AuthenticaionRepositoryImpl implements AuthenticationRepository {
     if (connection) {
       try {
         final result = await apiService.signIn(SignIn(
-          username: "Aabh",
-          password: "admin@1",
+          username: userName!,
+          password: password!,
         ));
 
         if (result.isDefinedAndNotNull) {
           sharedPreferencesManager.putBool(
               SharedPreferencesManager.keyIsLogin, true);
-          return Right(result!);
+          sharedPreferencesManager.putString(
+              SharedPreferencesManager.keyAccessToken, result!.accessToken!);
+          return Right(result);
         } else {
           return Left(CredentialsFailure());
         }
@@ -51,10 +53,13 @@ class AuthenticaionRepositoryImpl implements AuthenticationRepository {
       try {
         final result = await apiService.registerUser(
             Register(email: email!, password: password!, username: userName!));
+
         if (result.isDefinedAndNotNull) {
+          sharedPreferencesManager.putString(
+              SharedPreferencesManager.keyAccessToken, result!.accessToken!);
           sharedPreferencesManager.putBool(
               SharedPreferencesManager.keyIsLogin, true);
-          return Right(result!);
+          return Right(result);
         } else {
           return Left(CredentialsFailure());
         }

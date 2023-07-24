@@ -1,5 +1,5 @@
 import 'package:find_scan_return_web/presentation/resources/size_config.dart';
-import 'package:find_scan_return_web/presentation/widgets/widget/input_widgets.dart';
+import 'package:find_scan_return_web/presentation/widgets/inputFields/input_widgets.dart';
 import 'package:flutter/material.dart';
 
 class OkrMultipleInputFields extends StatefulWidget {

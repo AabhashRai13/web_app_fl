@@ -1,4 +1,5 @@
 import 'package:find_scan_return_web/presentation/resources/router/routes.dart';
+import 'package:find_scan_return_web/presentation/resources/theme.dart';
 import 'package:flutter/material.dart';
 import 'app/di.dart';
 
@@ -14,11 +15,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
+      debugShowCheckedModeBanner: false,
       title: 'Find Scan Return',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
+      theme: theme(),
       routerConfig: AppRouter.router,
     );
   }

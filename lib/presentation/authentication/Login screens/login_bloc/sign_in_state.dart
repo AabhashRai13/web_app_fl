@@ -26,6 +26,14 @@ class Loaded extends SignInState {
   List<Object> get props => [authentication];
 }
 
+class QrCreated extends SignInState {
+  final bool created;
+
+  const QrCreated({required this.created});
+
+  @override
+  List<Object> get props => [created];
+}
 
 class Error extends SignInState {
   final String message;
