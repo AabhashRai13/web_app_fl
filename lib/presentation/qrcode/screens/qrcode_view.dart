@@ -37,6 +37,11 @@ class _QrCodeViewState extends State<QrCodeView> {
       },
       builder: (context, state) {
         if (state is BatchNumber) {
+          if (state.batchNumbers.isEmpty) {
+            return const Center(
+              child: Text(AppStrings.createQrByButton),
+            );
+          }
           return Responsive(
             mobile: QrCodeMobile(
               batchNumbers: state.batchNumbers,
@@ -56,9 +61,13 @@ class _QrCodeViewState extends State<QrCodeView> {
           return const Center(
             child: CircularProgressIndicator(),
           );
+        } else if (state is QrError) {
+          return Center(
+            child: Text(state.message),
+          );
         } else {
           return const Center(
-            child: Text(AppStrings.somethingWentWrong),
+            child: Text(AppStrings.createQr),
           );
         }
       },

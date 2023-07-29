@@ -97,7 +97,7 @@ class AppStrings {
   static const String save = "Save";
   static const String downloadQrCodes = "Download QR Codes";
   static const String createQr = "Create Qr";
-
+static const String createQrByButton = "Create Qr Using the Big Button";
   static const String enterTheNumberOfQr =
       "Please enter the number of QR you want to create.";
 
