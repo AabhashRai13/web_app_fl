@@ -8,6 +8,7 @@ abstract class AuthenticationRepository {
 
   Future<Either<Failure, Authentication>> signUp(
       {String email, String password, String userName});
+
   Future<void> signOut();
 
   Future<bool> isSignedIn();

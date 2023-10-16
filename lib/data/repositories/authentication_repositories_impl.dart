@@ -1,4 +1,3 @@
-import 'dart:js_interop';
 import 'package:dartz/dartz.dart';
 import 'package:find_scan_return_web/app/preferences/local_storage_manager.dart';
 import 'package:find_scan_return_web/app/preferences/shared_preferences_manager.dart';
@@ -30,10 +29,10 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
           password: password!,
         ));
 
-        if (result.isDefinedAndNotNull) {
+        if (result != null) {
           sharedPreferencesManager.putBool(
               SharedPreferencesManager.keyIsLogin, true);
-          _localStorageService.saveTokenToLocalStorage(result!.accessToken!);
+          _localStorageService.saveTokenToLocalStorage(result.accessToken!);
           return Right(result);
         } else {
           return Left(CredentialsFailure());
@@ -55,8 +54,8 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
         final result = await apiService.registerUser(
             Register(email: email!, password: password!, username: userName!));
 
-        if (result.isDefinedAndNotNull) {
-          _localStorageService.saveTokenToLocalStorage(result!.accessToken!);
+        if (result != null) {
+          _localStorageService.saveTokenToLocalStorage(result.accessToken!);
 
           sharedPreferencesManager.putBool(
               SharedPreferencesManager.keyIsLogin, true);
